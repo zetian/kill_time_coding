@@ -18,10 +18,11 @@ function Permutation(arr, num) {
     if (arr.length >= num && num > 0) {
         var perm = [];
         (function fn(n) {
-            for(var i = n; i < num; i++) {  
+            for(var i = n; i < arr.length ; i++) {  
                 swap(arr, i, n);  
-                if(n + 1 < arr.length - 1)
+                if((n + 1) < num) {
                     fn(n + 1);
+                }
                 else {
                     var clonedNodesArray = arr.slice(0, num);
                     perm.push(clonedNodesArray);
@@ -34,7 +35,7 @@ function Permutation(arr, num) {
 }  
 
 
-var test = Permutation(inputNumbers, 3);
+var test = Permutation(inputNumbers, 4);
 
 console.log(test);
 
