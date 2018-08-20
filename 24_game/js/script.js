@@ -1,5 +1,11 @@
 const inputNumbers = [1, 3, 5, 7];
-console.log(inputNumbers);
+
+const inputs = d3.select('#input-numbers').selectAll('.form-group')
+    .data(inputNumbers).enter()
+    .append('div')
+    .attr('class', 'form-group');
+inputs.append('label').text((d, i) => `Number ${i+1}: `);
+inputs.append('input').attr('placeholder', d => d);
 
 function swap(arr, i, j) {  
     if (i != j) {  
@@ -35,7 +41,7 @@ function Permutation(arr, num) {
 }  
 
 
-var test = Permutation(inputNumbers, 4);
+var test = Permutation(inputNumbers, 3);
 
 console.log(test);
 
