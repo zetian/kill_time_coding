@@ -115,9 +115,12 @@ function showAnswer() {
 
   playGame(input_numbers);
 
-  document.getElementById('audio-bling').play();
-
-  if (solution === false) res = ['Can\'t find an answer 🤪.'];
+  if (solution === false) {
+    res = ['Can\'t find an answer 🤪.'];
+    document.getElementById('audio-fail').play();
+  } else {
+    document.getElementById('audio-bling').play();
+  }
   const answers = d3.select('#answers')
     .selectAll('.answer')
     .data(res);
@@ -125,7 +128,7 @@ function showAnswer() {
     .enter()
     .append('div')
 
-  answers.attr('class', 'answer')
+  answers.attr('class', 'answer text-center')
     .html((d, i) => (d.includes('Can') ? d : `Solution 👉 ${d} = 24`.replace(/\//gi, '&divide').replace(/\*/gi, '&times')));
   answers.exit().remove();
 
