@@ -1,7 +1,5 @@
 const input = ['#', '#', '#', '#'];
 
-
-
 const inputs = d3.select('#input-numbers').selectAll('.form-group')
   .data(input).enter()
   .append('div')
@@ -96,12 +94,14 @@ function playGame(input_numbers) {
       var formula3 = "(" + perm[i][0] + symbols[j][0] + perm[i][1] + ")" + symbols[j][1] + "(" + perm[i][2] + symbols[j][2] + perm[i][3] + ")";
       var formula4 = "(" + perm[i][0] + symbols[j][0] + perm[i][1] + symbols[j][1] + perm[i][2] + ")" + symbols[j][2] + perm[i][3];
       var formula5 = perm[i][0] + symbols[j][0] + "(" + perm[i][1] + symbols[j][1] + perm[i][2] + symbols[j][2] + perm[i][3] + ")";
-      var formula6 = perm[i][0] + symbols[j][0] + perm[i][1] + symbols[j][1] + perm[i][2] + symbols[j][2] + perm[i][3];
-      formulas = [formula1, formula2, formula3, formula4, formula5, formula6];
+      var formula6 = perm[i][0] + symbols[j][0] + "(" + perm[i][1] + symbols[j][1] + perm[i][2] + ")" + symbols[j][2] + perm[i][3];
+      var formula7 = perm[i][0] + symbols[j][0] + perm[i][1] + symbols[j][1] + perm[i][2] + symbols[j][2] + perm[i][3];
+      formulas = [formula7, formula1, formula2, formula3, formula4, formula5, formula6];
       for (k = 0; k < formulas.length; k++) {
         if (Math.abs(24 - eval(formulas[k])) < 0.0001) {
           res.push(formulas[k]);
           solution = true;
+          return;
         }
       }
     }
@@ -126,7 +126,7 @@ function showAnswer() {
     .append('div')
 
   answers.attr('class', 'answer')
-    .html((d, i) => (d.includes('Can') ? d : `Solution ${i + 1} 👉 ${d} = 24`.replace(/\//gi, '&divide').replace(/\*/gi, '&times')));
+    .html((d, i) => (d.includes('Can') ? d : `Solution 👉 ${d} = 24`.replace(/\//gi, '&divide').replace(/\*/gi, '&times')));
   answers.exit().remove();
 
 }
