@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<meta charset='utf-8'>
+<html>
+
+<head>
+  <script src="http://d3js.org/d3.v3.min.js" charset="utf-8"></script>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+    crossorigin="anonymous">
+  <link rel='stylesheet' href='css/style.css'>
+</head>
+
+<body>
+  <div>
+    <audio id="audio-bling">
+      <source src="res/bling.mp3" type="audio/ogg">
+    </audio>
+    <audio id="audio-deal">
+        <source src="res/deal.mp3" type="audio/ogg">
+      </audio>
+  </div>
+  <div id='main' class="container">
+    <h1 class="text-center">24 Game</h1>
+    <div class="text-center">
+      <button id='random' class="btn btn-light" onclick="randomInput()">Populate random numbers</button>
+    </div>
+    <div id='input-numbers' class="container"></div>
+    <div class="show-answer">
+      <button type="" class="container btn btn-warning" onclick="showAnswer()">Show me the answer 🙈</button>
+    </div>
+    <div id='answers' class="container"></div>
+  </div>
+  <script type='text/javascript' src='../24_game/js/script.js'></script>
+  <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+    crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+    crossorigin="anonymous"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+    crossorigin="anonymous"></script>
+</body>
+
+</html>
