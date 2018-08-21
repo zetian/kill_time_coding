@@ -136,6 +136,6 @@ function showAnswer() {
 
 function randomInput() {
   document.getElementById('audio-deal').play();
-  d3.selectAll('.input-num').attr('value', () => Math.round(Math.random() * 10));
+  d3.selectAll('.input-num').attr('value', () => Math.round(Math.random() * 15) + 1);
 }
 
