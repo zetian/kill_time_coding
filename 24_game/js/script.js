@@ -1,7 +1,6 @@
 const input = ['#', '#', '#', '#'];
 
 
-const math_symbols = ["+", "-", "*", "/"]
 
 const inputs = d3.select('#input-numbers').selectAll('.form-group')
     .data(input).enter()
@@ -11,12 +10,6 @@ inputs.append('input')
     .attr('type', 'number')
     .attr('class', 'input-num')
     .attr('placeholder', d => d);
-
-var input_numbers = []
-for (i = 0; i < input.length; i++) {
-    input_numbers.push(input[i].toString());
-}
-console.log(input_numbers);
 
 function swap(arr, i, j) {  
     if (i != j) {  
@@ -28,7 +21,6 @@ function swap(arr, i, j) {
 
 function isItemInArray(array, item) {
     for (var i = 0; i < array.length; i++) {
-        // This if statement depends on the format of your array
         checker = true;
         for (j = 0; j < item.length; j++) {
             if (array[i][j] != item[j]) {
@@ -39,7 +31,7 @@ function isItemInArray(array, item) {
             return true;
         }
     }
-    return false;   // Not found
+    return false;
 }
 
 function Permutation(arr, num) {
@@ -48,14 +40,10 @@ function Permutation(arr, num) {
 	@param arr - the input array
 	@param num - num of element of partial input, num out of arr.length 
     */
-    // arr.sort();
     if (arr.length >= num && num > 0) {
         var perm = [];
         (function fn(n) {
             for(var i = n; i < arr.length ; i++) {
-                // if (i != 0 && arr[i] == arr[i - 1]) {
-                //     continue;
-                // }  
                 swap(arr, i, n);  
                 if((n + 1) < num) {
                     fn(n + 1);
@@ -74,45 +62,50 @@ function Permutation(arr, num) {
     }
 }
 
-sym = []
-symbols = []
-for (i = 0; i < math_symbols.length; i++) {
-    sym.push(math_symbols[i]);
-    for (j = 0; j < math_symbols.length; j++) {
-        sym.push(math_symbols[j]);
-        for (k = 0; k < math_symbols.length; k++){
-            sym.push(math_symbols[k]);
-            var newArray = sym.slice();
-            symbols.push(newArray);
+function mathSymbols() {
+    const math_symbols = ["+", "-", "*", "/"]
+    sym = []
+    symbols = []
+    for (i = 0; i < math_symbols.length; i++) {
+        sym.push(math_symbols[i]);
+        for (j = 0; j < math_symbols.length; j++) {
+            sym.push(math_symbols[j]);
+            for (k = 0; k < math_symbols.length; k++){
+                sym.push(math_symbols[k]);
+                var newArray = sym.slice();
+                symbols.push(newArray);
+                sym.pop();
+            }
             sym.pop();
         }
         sym.pop();
     }
-    sym.pop();
+    return symbols;
 }
 
 var solution = false;
 function playGame(input_numbers) {
     solution = false;
     res = [];
-var perm = Permutation(input_numbers, 4);
-for (i = 0; i < perm.length; i++) {
-    for (j = 0; j < symbols.length; j++) {
-        var formula1 = "(" + perm[i][0] + symbols[j][0] + perm[i][1] + ")" + symbols[j][1] + perm[i][2] + symbols[j][2] + perm[i][3];
-        var formula2 = perm[i][0] + symbols[j][0]+ perm[i][1] + symbols[j][1] + "(" + perm[i][2] + symbols[j][2] + perm[i][3] + ")";
-        var formula3 = "(" + perm[i][0] + symbols[j][0]+ perm[i][1] + ")" + symbols[j][1] + "(" + perm[i][2] + symbols[j][2] + perm[i][3] + ")";
-        var formula4 = "(" + perm[i][0] + symbols[j][0]+ perm[i][1] + symbols[j][1] + perm[i][2] + ")" + symbols[j][2] + perm[i][3];
-        var formula5 = perm[i][0] + symbols[j][0]+ "(" + perm[i][1] + symbols[j][1] + perm[i][2] + symbols[j][2] + perm[i][3] + ")";
-        var formula6 = perm[i][0] + symbols[j][0]+ perm[i][1] + symbols[j][1] + perm[i][2] + symbols[j][2] + perm[i][3];
-        formulas = [formula1, formula2, formula3, formula4, formula5, formula6];
-        for (k = 0; k < formulas.length; k++) {
-            if (Math.abs(24 - eval(formulas[k])) < 0.0001) {
-                res.push(formulas[k]);
-                solution = true;
+    var perm = Permutation(input_numbers, 4);
+    var symbols = mathSymbols();
+    for (i = 0; i < perm.length; i++) {
+        for (j = 0; j < symbols.length; j++) {
+            var formula1 = "(" + perm[i][0] + symbols[j][0] + perm[i][1] + ")" + symbols[j][1] + perm[i][2] + symbols[j][2] + perm[i][3];
+            var formula2 = perm[i][0] + symbols[j][0]+ perm[i][1] + symbols[j][1] + "(" + perm[i][2] + symbols[j][2] + perm[i][3] + ")";
+            var formula3 = "(" + perm[i][0] + symbols[j][0]+ perm[i][1] + ")" + symbols[j][1] + "(" + perm[i][2] + symbols[j][2] + perm[i][3] + ")";
+            var formula4 = "(" + perm[i][0] + symbols[j][0]+ perm[i][1] + symbols[j][1] + perm[i][2] + ")" + symbols[j][2] + perm[i][3];
+            var formula5 = perm[i][0] + symbols[j][0]+ "(" + perm[i][1] + symbols[j][1] + perm[i][2] + symbols[j][2] + perm[i][3] + ")";
+            var formula6 = perm[i][0] + symbols[j][0]+ perm[i][1] + symbols[j][1] + perm[i][2] + symbols[j][2] + perm[i][3];
+            formulas = [formula1, formula2, formula3, formula4, formula5, formula6];
+            for (k = 0; k < formulas.length; k++) {
+                if (Math.abs(24 - eval(formulas[k])) < 0.0001) {
+                    res.push(formulas[k]);
+                    solution = true;
+                }
             }
         }
     }
-}
     return res;
 }
 
