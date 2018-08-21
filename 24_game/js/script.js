@@ -1,4 +1,4 @@
-const input = [3, 3, 8, 8];
+const input = ['#', '#', '#', '#'];
 
 
 const math_symbols = ["+", "-", "*", "/"]
@@ -6,11 +6,13 @@ const math_symbols = ["+", "-", "*", "/"]
 const inputs = d3.select('#input-numbers').selectAll('.form-group')
     .data(input).enter()
     .append('div')
-    .attr('class', 'form-group');
-inputs.append('label').text((d, i) => `Number ${i+1}: `);
-inputs.append('input').attr('placeholder', d => d);
+    .attr('class', 'form-group input-number');
+inputs.append('input')
+    .attr('type', 'number')
+    .attr('class', 'input-num')
+    .attr('placeholder', d => d);
 
-const input_numbers = []
+var input_numbers = []
 for (i = 0; i < input.length; i++) {
     input_numbers.push(input[i].toString());
 }
@@ -20,7 +22,7 @@ function swap(arr, i, j) {
     if (i != j) {  
         var temp = arr[i];  
         arr[i] = arr[j];  
-        arr[j] = temp;  
+        arr[j] = temp;
     }  
 }
 
@@ -89,9 +91,11 @@ for (i = 0; i < math_symbols.length; i++) {
     sym.pop();
 }
 
-var perm = Permutation(input_numbers, 4);
 var solution = false;
-var res = [];
+function playGame(input_numbers) {
+    solution = false;
+    res = [];
+var perm = Permutation(input_numbers, 4);
 for (i = 0; i < perm.length; i++) {
     for (j = 0; j < symbols.length; j++) {
         var formula1 = "(" + perm[i][0] + symbols[j][0] + perm[i][1] + ")" + symbols[j][1] + perm[i][2] + symbols[j][2] + perm[i][3];
@@ -109,7 +113,30 @@ for (i = 0; i < perm.length; i++) {
         }
     }
 }
-console.log(solution);
-console.log(res);
+    return res;
+}
 
+function showAnswer() {
+    input_numbers = $('input[class^=input-num]').map((idx, elem) => $(elem).val()).get().map(d => (isNaN(parseInt(d)) ? 0 : parseInt(d)));
+    console.log(input_numbers);
+
+    playGame(input_numbers);
+
+    if(solution === false) res = ['Can\'t find an answer 🤪.'];
+    const answers = d3.select('#answers')
+        .selectAll('.answer')
+        .data(res);
+    answers
+        .enter()
+        .append('div')
+
+    answers.attr('class', 'answer')
+        .html((d, i) => (d.includes('Can') ? d : `Solution ${i+1} 👉 ${d} = 24`.replace(/\//gi, '&divide').replace(/\*/gi, '&times')));
+    answers.exit().remove();
+
+}
+
+function randomInput() {
+    d3.selectAll('.input-num').attr('value', () => Math.round(Math.random()*10));
+}
 

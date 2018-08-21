@@ -1,0 +1,46 @@
+:root {
+	--color-dark-gray: #1A2930;
+	--color-light-gray: #C5C1C0;
+	--color-white: #ffffff;
+	--color-black: #0A1612;
+	--color-yellow: #F7CE3E;
+}
+body {
+	background-color: var(--color-dark-gray);
+	font-family: "Comic Sans MS";
+}
+h1 {
+	margin: auto;
+	color: var(--color-yellow);
+}
+#random {
+	font-size: 0.71rem;
+	padding-top: 2px;
+	padding-bottom: 2px;
+	margin: 10px 10px 10px 10px;
+}
+#input-numbers {
+	width: 233px;
+	align-content: center;
+}
+.form-group {
+	display: inline-block;
+	margin: 10px 10px 10px 10px;
+}
+.form-group input {
+	width: 80px;
+	height: 120px;
+	font-size: 3.5rem;
+	text-align: center;
+	background-color: var(--color-white);
+	border-radius: 10px;
+}
+.show-answer {
+	margin: auto;
+}
+#answers {
+	margin-top: 10px;
+}
+.answer {
+	color: var(--color-white);
+}
